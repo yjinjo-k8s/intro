@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    run: my-nginx
+spec:
+  type: NodePort  # 외부에서 접속할 때 노드포트 서비스 사용
+  ports:
+    - port: 8080  # 노드포트 서비스에서 사용하는 포트
+      targetPort: 80  # 파드(컨테이너)에서 사용하는 포트
+      protocol: TCP
+      name: http
+  selector:
+    app: nginx  # nginx 라는 이름의 레이블을 갖는 파드를 서비스
